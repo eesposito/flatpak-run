@@ -45,8 +45,10 @@ case "$app_name" in
 		;;
 esac
 
+
 # Search for the app
-app_id=$(flatpak list --app | grep -F -i "$app_name" | awk '{for(i=1;i<=NF;i++){ if($i ~ /\S+\.\S*/){print $i; break;} } }');
+app_id=$(flatpak list --app --columns=application,name | grep -F -i "$app_name" | awk '{print $1}');
+
 
 # Launch the app if found
 # Check if verbose mode is requested
